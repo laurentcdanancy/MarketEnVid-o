@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reels Pro • Catalogue Premium 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0f0f1e;
+            --primary: #6366f1;
+            --accent: #8b5cf6;
+            --turquoise: #06b6d4;
+            --text: #e2e8f0;
+            --glow: 0 0 35px rgba(139, 92, 246, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* HEADER ANIMÉ + COMPACT */
+        .hero-header {
+            position: relative;
+            height: 40vh;
+            min-height: 420px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #312e81 100%);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Effet parallax fond */
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.3), transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.25), transparent 50%);
+            animation: floatBg 20s infinite ease-in-out;
+        }
+
+        @keyframes floatBg {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translateY(-30px) scale(1.05);
+                opacity: 0.8;
+            }
+        }
+
+        /* Particules subtiles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            animation: rise 18s infinite linear;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+            animation: fadeInUp 1.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(60px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-title {
+            font-size: 5.8rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(90deg, #a78bfa, #60a5fa, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .slogan {
+            font-size: 1.7rem;
+            color: rgba(226, 232, 240, 0.9);
+            font-weight: 300;
+            margin: 1.5rem 0;
+            opacity: 0;
+            animation: fadeIn 2s forwards 1s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* NAVBAR COLLÉE EN BAS DU HEADER */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 15, 30, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.3rem 0;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: 50px;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: var(--glow);
+            transform: translateY(-4px);
+        }
+
+        main {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 28px;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: rgba(20, 25, 50, 0.6);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            transition: 0.5s;
+            backdrop-filter: blur(12px);
+        }
+
+        .card:hover {
+            transform: translateY(-16px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.25);
+            border-color: var(--accent);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9/16;
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            inset: 0;
+            width: 100% !important;
+            height: 100% !important;
+            border: none;
+        }
+
+        .card-title {
+            padding: 1rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin: 5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: var(--text);
+            cursor: pointer;
+            transition: 0.4s;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--accent);
+            color: white;
+            box-shadow: var(--glow);
+        }
+
+        @media (max-width: 768px) {
+            .hero-header {
+                height: 60vh;
+                min-height: 480px;
+            }
+
+            .main-title {
+                font-size: 3.8rem;
+            }
+
+            .slogan {
+                font-size: 1.4rem;
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+
+            .nav-btn {
+                padding: 12px 24px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER ANIMÉ -->
+    <header class="hero-header">
+        <div class="hero-bg"></div>
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <h1 class="main-title">Reels Pro</h1>
+            <p class="slogan">Le catalogue premium des innovations 2025</p>
+        </div>
+    </header>
+
+    <!-- NAVBAR COLLÉE EN BAS DU HEADER -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-btn active" data-cat="all">Toutes</div>
+            <div class="nav-btn" data-cat="sourcing">Sourcing</div>
+            <div class="nav-btn" data-cat="vetement">Vêtements & Mode</div>
+            <div class="nav-btn" data-cat="sacamain">Sac à Main femme</div>
+            <div class="nav-btn" data-cat="isolation">Isolation</div>
+            <div class="nav-btn" data-cat="grosmachine">Machine Agriculture</div>
+            <div class="nav-btn" data-cat="tracteur">Tracteur</div>
+            <div class="nav-btn" data-cat="minitracteur">Mini Tracteur</div>
+            <div class="nav-btn" data-cat="container">Maisons Container</div>
+            <div class="nav-btn" data-cat="energie">Énergie</div>
+            <div class="nav-btn" data-cat="machine">Machines</div>
+            <div class="nav-btn" data-cat="auto">Voiture - Camion</div>
+            <div class="nav-btn" data-cat="autolavage">Lavage Auto</div>
+            <div class="nav-btn" data-cat="moto">Moto</div>
+            <div class="nav-btn" data-cat="ordinateur">Ordinateur</div>
+            <div class="nav-btn" data-cat="telephone">Téléphone</div>
+            <div class="nav-btn" data-cat="purificateurhuile">Purificateur d'huile</div>
+            <div class="nav-btn" data-cat="india">India Construction</div>
+            <div class="nav-btn" data-cat="construction">tutoriel Construction</div>
+            <div class="nav-btn" data-cat="arabe">Apprendre l arabe par chinois</div>
+            <div class="nav-btn" data-cat="immobilier">entreprise diagnostic</div>
+            <div class="nav-btn" data-cat="solaire">voiture electrique energie solaire</div>
+            <div class="nav-btn" data-cat="robot">technologie robot maison </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="grid" id="grid"></div>
+        <div class="pagination" id="pagination"></div>
+    </main>
+
+    <script>
+        // Particules animées
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 25; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.width = p.style.height = Math.random() * 6 + 3 + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 18 + 's';
+            p.style.animationDuration = 15 + Math.random() * 10 + 's';
+            particles.appendChild(p);
+        }
+
+        // Tes vidéos (exemple – je t’en mets quelques-unes par catégorie)
+        const videos = [
+            //vetement
+            { url: "https://www.facebook.com/reel/1896135465115819", title: "vetement en gros usine", cat: "vetement" },
+            { url: "https://www.facebook.com/reel/1361389535365398", title: "vetement en gros usine", cat: "vetement" },
+            { url: "https://www.facebook.com/reel/726981949847482", title: "Sac à main pour femme ", cat: "vetement" },
+            { url: "https://www.facebook.com/reel/856773813484841", title: "Rvetement en gros usine", cat: "vetement" },
+            { url: "https://www.facebook.com/reel/1606176917419376", title: "vetement en gros usine", cat: "vetement" },
+            { url: "https://www.facebook.com/reel/2552386375131413", title: "vetement en gros usine", cat: "vetement" },
+            { url: "https://www.facebook.com/reel/24611093408539817", title: "vetement en gros usine", cat: "vetement" },
+            { url: "https://www.facebook.com/reel/827536700149297", title: "vetement en gros usine", cat: "vetement" },
+            { url: "https://www.facebook.com/reel/25253445824320499", title: "vetement en gros usine", cat: "vetement" },
+            { url: "https://www.facebook.com/reel/1895434824371535", title: "vetement en gros usine", cat: "vetement" },
+            //sac à main
+            { url: "https://www.facebook.com/reel/1977960606391165", title: "Sac à main pour femme", cat: "sacamain" },
+            { url: "https://www.facebook.com/reel/1337082181289184", title: "Sac à main pour femme", cat: "sacamain" },
+            { url: "https://www.facebook.com/reel/2016090575899560", title: "Sac à main pour femme", cat: "sacamain" },
+            { url: "https://www.facebook.com/reel/1473065727244552", title: "Casquette", cat: "sacamain" },
+
+            //Sourcing
+            { url: "https://www.facebook.com/reel/1546255646523371", title: "vetement en gros usine", cat: "sourcing" },
+            { url: "https://www.facebook.com/reel/1378050460579860", title: "vetement en gros usine", cat: "sourcing" },
+            { url: "https://www.facebook.com/reel/1480077266861227", title: "vetement en gros usine", cat: "sourcing" },
+            { url: "https://www.facebook.com/reel/829334853250908", title: "vetement en gros usine", cat: "sourcing" },
+            { url: "https://www.facebook.com/reel/2144672862729747", title: "vetement en gros usine", cat: "sourcing" },
+            { url: "https://www.facebook.com/reel/1402846181443899", title: "vetement en gros usine", cat: "sourcing" },
+            { url: "https://www.facebook.com/reel/2533808383654031", title: "vetement en gros usine", cat: "sourcing" },
+
+
+            //isolation
+            { url: "https://www.facebook.com/reel/846600474748396", title: "intermediare comission", cat: "isolation" },
+            { url: "https://www.facebook.com/reel/1776640629653229", title: "intermediare comission", cat: "isolation" },
+            { url: "https://www.facebook.com/reel/846600474748396", title: "intermediare comission", cat: "isolation" },
+            { url: "https://www.facebook.com/reel/1430815735155242", title: "intermediare comission", cat: "isolation" },
+            { url: "https://www.facebook.com/reel/1154495906858358", title: "intermediare comission", cat: "isolation" },
+            { url: "https://www.facebook.com/reel/25617124551270973", title: "Batterie pour solaire", cat: "energie" },
+            { url: "https://www.facebook.com/reel/1498734157622927", title: "Panneau solaire aide financer", cat: "energie" },
+
+
+            //auto moto electrique energie solaire
+            { url: "https://www.facebook.com/reel/1466185447786821", title: "vehicule Panneau solaire", cat: "solaire" },
+            { url: "https://www.facebook.com/reel/2357260151372547", title: "vehicule Panneau solaire", cat: "solaire" },
+            //tracteur
+            { url: "https://www.facebook.com/reel/1186035653483129", title: "Tracteur autonome", cat: "tracteur" },
+            //minitracteur 
+            { url: "https://www.facebook.com/reel/709551255515546", title: "Tracteur autonome", cat: "minitracteur" },
+            { url: "https://www.facebook.com/reel/838185492191594", title: "Tracteur autonome", cat: "minitracteur" },
+            { url: "https://www.facebook.com/reel/1384663303382719", title: "Tracteur autonome", cat: "minitracteur" },
+            { url: "https://www.facebook.com/reel/2210380482721774", title: "Tracteur autonome", cat: "minitracteur" },
+            { url: "https://www.facebook.com/reel/3338582259628128", title: "Tracteur autonome", cat: "minitracteur" },
+            { url: "https://www.facebook.com/reel/1928784781325208", title: "Tracteur autonome", cat: "minitracteur" },
+
+
+            //tatil yerleri booking
+            { url: "https://www.facebook.com/reel/1234171812063057", title: "voyager en turquie hotel", cat: "voyage" },
+
+
+
+            //Maison container
+            { url: "https://www.facebook.com/reel/1531242421451551", title: "Maison container 4 chambres", cat: "container" },
+            { url: "https://www.facebook.com/reel/622234264249165", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1320647836430559", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/2931841193674802", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1382700536955026", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/838334598821026", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/849399997669333", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1767365013935491", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/706904028580795", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1180443730798999", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/775006658916671", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/817695321223302", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/858107536597325", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1202110225424976", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/4146561738901957", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/838334598821026", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/849399997669333", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1767365013935491", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/706904028580795", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1180443730798999", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/775006658916671", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/817695321223302", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/858107536597325", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1202110225424976", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/4146561738901957", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1531242421451551", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/877463868051033", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1767365013935491", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/2658808267814602", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/4141489759499843", title: "Maison container", cat: "container" },
+            { url: "https://www.facebook.com/reel/1347224683809938", title: "Maison container", cat: "container" },
+
+
+            //energie batterie
+            { url: "https://www.facebook.com/reel/2099136730617537", title: "Batterie lithium 200kWh", cat: "energie" },
+            { url: "https://www.facebook.com/reel/1420503592829638", title: "Batterie pour solaire", cat: "energie" },
+            { url: "https://www.facebook.com/reel/1353139999684914", title: "Batterie pour solaire", cat: "energie" },
+            { url: "https://www.facebook.com/reel/2817202218611427", title: "Batterie pour solaire", cat: "energie" },
+            { url: "https://www.facebook.com/reel/2099136730617537", title: "Batterie pour solaire", cat: "energie" },
+            { url: "https://www.facebook.com/reel/25617124551270973", title: "Batterie pour solaire", cat: "energie" },
+            { url: "https://www.facebook.com/reel/1518577302469118", title: "Batterie pour solaire", cat: "energie" },
+            { url: "https://www.facebook.com/reel/1150486456409445", title: "Batterie pour solaire", cat: "energie" },
+
+            //robot maison
+            { url: "https://www.facebook.com/reel/847843824281203", title: "robot maison ", cat: "robot" },
+            { url: "https://www.facebook.com/reel/2533808383654031", title: "robot maison ", cat: "robot" },
+            { url: "https://www.facebook.com/reel/2333364613783122", title: "robot maison  fare des chips", cat: "robot" },
+            { url: "https://www.facebook.com/reel/1368742291384920", title: "robot maison  fermer les verre", cat: "robot" },
+            { url: "https://www.facebook.com/reel/1986984778752264", title: "robot maison  fermer les verre", cat: "robot" },
+            { url: "https://www.facebook.com/reel/1325460188768201", title: "robot maison  fermer les verre", cat: "robot" },
+            { url: "https://www.facebook.com/reel/763786759989505", title: "robot maison  fermer les verre", cat: "robot" },
+            { url: "https://www.facebook.com/reel/4287777804839345", title: "robot maison  fermer les verre", cat: "robot" },
+            { url: "https://www.facebook.com/reel/1330273488628691", title: "robot maison  fermer les verre", cat: "robot" },
+            { url: "https://www.facebook.com/reel/1163015032347616", title: "robot maison  fermer les verre", cat: "robot" },
+            { url: "https://www.facebook.com/reel/1852294179012121", title: "robot maison  fermer les verre", cat: "robot" },
+
+
+            //machine
+            { url: "https://www.facebook.com/reel/1308436620958067", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/25049676871369951", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/2213836969124285", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/1180882457481997", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/841354515074952", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/2321178264970018", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/1372332134330016", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/2837712053065638", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/1321166452895793", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/846793988077939", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/1492089265210608", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/1623968908980795", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/1172603888344860", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/1151573510523905", title: "Machine CNC professionnelle", cat: "machine" },
+
+            // Engins TP
+            { url: " https://www.facebook.com/reel/715708698215329", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: " https://www.facebook.com/reel/2099500824120327", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/743557945432299", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/2032327150933160", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/728726373590779", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/1580743476629943", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/803520109352029", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/1237074738260332", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/1145567877557300", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/1722301988463704", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/1361557885761098", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/2179337562550471", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/1178285713808559", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/1406386197585617", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/755457497569526", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/875454188378097", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/25680990198169213", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/1180882457481997", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/24484845744545383", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/789736800572570", title: "Machine CNC professionnelle", cat: "machine" },
+            { url: "https://www.facebook.com/reel/3617164245085355", title: "Machine CNC professionnelle", cat: "grosmachine" },
+            { url: "https://www.facebook.com/reel/1403840404590440", title: "Machine CNC professionnelle", cat: "grosmachine" },
+
+
+
+            //auto
+            { url: "https://www.facebook.com/reel/1355600446166302", title: "Camion", cat: "auto" },
+            { url: "https://www.facebook.com/reel/4159221697678409", title: "Camion", cat: "auto" },
+            //car lavage
+            { url: "https://www.facebook.com/reel/2099162463950630", title: "Lavage auto", cat: "autolavage" },
+            { url: "https://www.facebook.com/reel/1554477859028046", title: "Lavage auto", cat: "autolavage" },
+            { url: "https://www.facebook.com/reel/1901881627385039", title: "Lavage auto", cat: "autolavage" },
+            { url: "https://www.facebook.com/reel/1199398932099275", title: "Lavage auto", cat: "autolavage" },
+            { url: "https://www.facebook.com/reel/765692979824114", title: "Lavage auto", cat: "autolavage" },
+            { url: "https://www.facebook.com/reel/1457913765287584", title: "Parking auto", cat: "autolavage" },
+            { url: "https://www.facebook.com/reel/1601493617673723", title: "Lavage auto", cat: "autolavage" },
+
+
+
+            //moto
+            { url: "https://www.facebook.com/reel/1851460815468095", title: "moto ", cat: "moto" },
+            //ordinateur 
+            { url: "https://www.facebook.com/reel/783253474708595", title: " ordinateur  ", cat: "ordinateur" },
+            //telephone
+            { url: "https://www.facebook.com/reel/783253474708595", title: "Téléphone  ", cat: "telephone" },
+            //purifacateur dhuile
+            { url: "https://www.facebook.com/reel/819999847027844", title: "purificateur d’huile", cat: "purificateur d’huile" },
+            { url: "https://www.facebook.com/reel/798626249998521", title: "purificateur d’huile", cat: "purificateur d’huile" },
+            { url: "https://www.facebook.com/reel/798626249998521", title: "purificateur d’huile", cat: "purificateur d’huile" },
+            { url: "https://www.facebook.com/reel/835028189510907", title: " ordinateur  ", cat: "ordinateur" },
+            //soudure
+            { url: "https://www.facebook.com/reel/799608552691364", title: "soudure", cat: "soudure" },
+            { url: "https://www.facebook.com/reel/25143454478647571", title: "soudure", cat: "soudure" },
+            { url: "https://www.facebook.com/reel/1106019771423080", title: "soudure", cat: "soudure" },
+            // tuto construction 
+            { url: "https://www.facebook.com/reel/430214556511249", title: "tuto construction", cat: "construction" },
+            { url: "https://www.facebook.com/reel/1409567529625479", title: "tuto construction", cat: "construction" },
+
+
+            //india construction
+            { url: "https://www.facebook.com/reel/4125791447750452", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/2238597769916146", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1898793077678239", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/25361915450169013", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1857607894824702", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1931621651039894", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/884010700970032", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/2351549865304019", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1766952850643827", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/24887694590932192", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1950283685549672", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1987331845443356", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1243650807548377", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1355380802242914", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/906298892067514", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/2145792432923278", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/821573137365598", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/709038572254953", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/2229984017481471", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/740281339081519", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/824906310399566", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1222116763072573", title: "India construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1574047970631759", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1615765836088727", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/25417504664542229", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1527895174922352", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1351282793129521", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1456696838947267", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/810461428211202", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1135003072136169", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1232272252070077", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/1593303704994804", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/3898382900460925", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/821174970295213", title: "India 2 construction", cat: "india" },
+            { url: "https://www.facebook.com/reel/24994275600237950", title: "India 2 construction", cat: "india" },
+
+
+
+            //apprendre l arabe
+            { url: "https://www.facebook.com/reel/1126742292650054", title: "Apprendre l arabe", cat: "arabe" },
+            //diagnostic immobilier 
+            { url: "https://www.facebook.com/reel/472036868543494", title: "Diagnostic immobiler dpe", cat: "immobilier" },
+
+        ];
+
+        // Même système de filtrage + pagination que précédemment
+        const itemsPerPage = 20;
+        let currentCat = 'all', currentPage = 1;
+        const grid = document.getElementById('grid');
+        const pagination = document.getElementById('pagination');
+
+        function filterVideos(cat) { return cat === 'all' ? videos : videos.filter(v => v.cat === cat); }
+
+        function displayPage(page, cat = currentCat) {
+            const filtered = filterVideos(cat);
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageItems = filtered.slice(start, end);
+
+            grid.innerHTML = '';
+            if (!pageItems.length) {
+                grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:5rem;font-size:1.8rem;color:#8b5cf6;">Aucune vidéo dans cette catégorie</div>`;
+                pagination.innerHTML = '';
+                return;
+            }
+
+            pageItems.forEach(v => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="video-container">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(v.url)}&show_text=0&muted=false"
+                                allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="card-title">${v.title}</div>
+                `;
+                grid.appendChild(card);
+            });
+
+            const totalPages = Math.ceil(filtered.length / itemsPerPage);
+            pagination.innerHTML = '';
+            if (totalPages > 1) {
+                for (let i = 1; i <= totalPages; i++) {
+                    const btn = document.createElement('button');
+                    btn.className = 'page-btn'; if (i === page) btn.classList.add('active');
+                    btn.textContent = i;
+                    btn.onclick = () => { currentPage = i; displayPage(i); window.scrollTo({ top: 600, behavior: 'smooth' }); };
+                    pagination.appendChild(btn);
+                }
+            }
+        }
+
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCat = btn.dataset.cat;
+                currentPage = 1;
+                displayPage(1);
+            };
+        });
+
+        displayPage(1);
+    </script>
+</body>
+
+</html>
