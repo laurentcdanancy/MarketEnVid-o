@@ -7,8 +7,8 @@
     <title>Reels Pro • Catalogue Premium 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
 </head>
+
 <style>
     :root {
         --bg: #0f0f1e;
@@ -140,22 +140,32 @@
         }
     }
 
-    /* BOUTON MENU MOBILE */
+    /* --- BOUTON MENU MOBILE (MODIFIÉ) --- */
     .menu-toggle {
         position: fixed;
-        top: 15px;
-        left: 15px;
-        z-index: 1001;
-        background: rgba(139, 92, 246, 0.8);
+        top: 20px;
+        left: 20px;
+        z-index: 2000;
+        /* Très haut pour être au dessus de tout */
+        background: rgba(139, 92, 246, 0.9);
+        backdrop-filter: blur(5px);
         color: white;
-        border: none;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        font-size: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        width: 45px;
+        height: 45px;
+        border-radius: 12px;
+        font-size: 1.2rem;
         cursor: pointer;
-        box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
         display: none;
+        /* Caché sur PC */
+        transition: all 0.3s ease;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu-toggle:active {
+        transform: scale(0.95);
     }
 
     /* NAVBAR CLASSIQUE (desktop + tablette) */
@@ -191,6 +201,7 @@
         white-space: nowrap;
         cursor: pointer;
         transition: all .35s ease;
+        user-select: none;
     }
 
     .nav-btn:hover,
@@ -201,35 +212,45 @@
         transform: translateY(-3px);
     }
 
-    /* OVERLAY MENU MOBILE (2 colonnes, très compact) */
+    /* OVERLAY MENU MOBILE */
     .mobile-menu {
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        inset: 0;
+        /* top, left, right, bottom 0 */
         background: rgba(10, 10, 25, 0.98);
-        backdrop-filter: blur(15px);
-        z-index: 1000;
-        padding: 80px 20px 20px;
+        backdrop-filter: blur(20px);
+        z-index: 1500;
+        padding: 90px 20px 40px;
+        /* Padding top pour laisser place au bouton */
         display: grid;
         grid-template-columns: 1fr 1fr;
+        /* 2 colonnes */
         gap: 12px;
+        align-content: start;
         opacity: 0;
         visibility: hidden;
         transition: all 0.4s ease;
         overflow-y: auto;
+        transform: translateY(-20px);
     }
 
     .mobile-menu.active {
         opacity: 1;
         visibility: visible;
+        transform: translateY(0);
     }
 
     .mobile-menu .nav-btn {
-        padding: 12px 8px;
-        font-size: 0.9rem;
         width: 100%;
+        text-align: center;
+        font-size: 0.85rem;
+        padding: 12px 5px;
+        white-space: normal;
+        /* Permet au texte de passer à la ligne */
+        line-height: 1.2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     main {
@@ -284,27 +305,57 @@
         color: white;
     }
 
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 30px;
+        padding-bottom: 50px;
+    }
+
+    .page-btn {
+        background: transparent;
+        border: 1px solid var(--accent);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .page-btn.active,
+    .page-btn:hover {
+        background: var(--accent);
+        box-shadow: var(--glow);
+    }
+
     /* RESPONSIVE FINAL */
     @media (max-width: 768px) {
         .menu-toggle {
-            display: block;
+            display: flex;
+            /* Active le bouton */
         }
 
         .navbar {
             display: none !important;
+            /* Cache la barre PC */
         }
 
-        /* cache la navbar classique */
         .hero-header {
             min-height: 260px;
             height: 38vh;
         }
 
-        main {
-            padding-top: 70px;
+        /* Ajustement titre mobile */
+        .main-title {
+            font-size: 2.5rem;
         }
 
-        /* espace pour le bouton menu */
+        main {
+            padding-top: 20px;
+        }
+
         .grid {
             gap: 1.5rem;
         }
@@ -320,7 +371,15 @@
 </style>
 
 <body>
-    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <!-- BOUTON MOBILE -->
+    <button class="menu-toggle" id="menuBtn">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- MENU MOBILE (Le contenu sera cloné via JS) -->
+    <div class="mobile-menu" id="mobileMenu"></div>
+
     <!-- HEADER ANIMÉ -->
     <header class="hero-header">
         <div class="hero-bg"></div>
@@ -331,9 +390,9 @@
         </div>
     </header>
 
-    <!-- NAVBAR COLLÉE EN BAS DU HEADER -->
+    <!-- NAVBAR COLLÉE EN BAS DU HEADER (PC) -->
     <nav class="navbar">
-        <div class="nav-container">
+        <div class="nav-container" id="navContainer">
             <div class="nav-btn active" data-cat="all">Toutes</div>
             <div class="nav-btn" data-cat="sourcing">Sourcing</div>
             <div class="nav-btn" data-cat="vetement">Vêtements & Mode</div>
@@ -366,7 +425,29 @@
     </main>
 
     <script>
-        // Particules animées
+        // 1. LOGIQUE DU MENU MOBILE
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navContainer = document.getElementById('navContainer');
+        const icon = menuBtn.querySelector('i');
+
+        // Cloner les boutons du PC vers le Mobile automatiquement
+        mobileMenu.innerHTML = navContainer.innerHTML;
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+
+            // Changer l'icone (Barres <-> Croix)
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // 2. PARTICLES
         const particles = document.getElementById('particles');
         for (let i = 0; i < 25; i++) {
             const p = document.createElement('div');
@@ -378,7 +459,7 @@
             particles.appendChild(p);
         }
 
-        // Tes vidéos (exemple – je t’en mets quelques-unes par catégorie)
+        // 3. DONNÉES VIDEOS
         const videos = [
             //vetement
             { url: "https://www.facebook.com/reel/1896135465115819", title: "vetement en gros usine", cat: "vetement" },
@@ -396,7 +477,6 @@
             { url: "https://www.facebook.com/reel/1337082181289184", title: "Sac à main pour femme", cat: "sacamain" },
             { url: "https://www.facebook.com/reel/2016090575899560", title: "Sac à main pour femme", cat: "sacamain" },
             { url: "https://www.facebook.com/reel/1473065727244552", title: "Casquette", cat: "sacamain" },
-
             //Sourcing
             { url: "https://www.facebook.com/reel/1546255646523371", title: "vetement en gros usine", cat: "sourcing" },
             { url: "https://www.facebook.com/reel/1378050460579860", title: "vetement en gros usine", cat: "sourcing" },
@@ -405,8 +485,6 @@
             { url: "https://www.facebook.com/reel/2144672862729747", title: "vetement en gros usine", cat: "sourcing" },
             { url: "https://www.facebook.com/reel/1402846181443899", title: "vetement en gros usine", cat: "sourcing" },
             { url: "https://www.facebook.com/reel/2533808383654031", title: "vetement en gros usine", cat: "sourcing" },
-
-
             //isolation
             { url: "https://www.facebook.com/reel/846600474748396", title: "intermediare comission", cat: "isolation" },
             { url: "https://www.facebook.com/reel/1776640629653229", title: "intermediare comission", cat: "isolation" },
@@ -415,8 +493,6 @@
             { url: "https://www.facebook.com/reel/1154495906858358", title: "intermediare comission", cat: "isolation" },
             { url: "https://www.facebook.com/reel/25617124551270973", title: "Batterie pour solaire", cat: "energie" },
             { url: "https://www.facebook.com/reel/1498734157622927", title: "Panneau solaire aide financer", cat: "energie" },
-
-
             //auto moto electrique energie solaire
             { url: "https://www.facebook.com/reel/1466185447786821", title: "vehicule Panneau solaire", cat: "solaire" },
             { url: "https://www.facebook.com/reel/2357260151372547", title: "vehicule Panneau solaire", cat: "solaire" },
@@ -429,13 +505,6 @@
             { url: "https://www.facebook.com/reel/2210380482721774", title: "Tracteur autonome", cat: "minitracteur" },
             { url: "https://www.facebook.com/reel/3338582259628128", title: "Tracteur autonome", cat: "minitracteur" },
             { url: "https://www.facebook.com/reel/1928784781325208", title: "Tracteur autonome", cat: "minitracteur" },
-
-
-            //tatil yerleri booking
-            { url: "https://www.facebook.com/reel/1234171812063057", title: "voyager en turquie hotel", cat: "voyage" },
-
-
-
             //Maison container
             { url: "https://www.facebook.com/reel/1531242421451551", title: "Maison container 4 chambres", cat: "container" },
             { url: "https://www.facebook.com/reel/622234264249165", title: "Maison container", cat: "container" },
@@ -468,8 +537,6 @@
             { url: "https://www.facebook.com/reel/2658808267814602", title: "Maison container", cat: "container" },
             { url: "https://www.facebook.com/reel/4141489759499843", title: "Maison container", cat: "container" },
             { url: "https://www.facebook.com/reel/1347224683809938", title: "Maison container", cat: "container" },
-
-
             //energie batterie
             { url: "https://www.facebook.com/reel/2099136730617537", title: "Batterie lithium 200kWh", cat: "energie" },
             { url: "https://www.facebook.com/reel/1420503592829638", title: "Batterie pour solaire", cat: "energie" },
@@ -479,7 +546,6 @@
             { url: "https://www.facebook.com/reel/25617124551270973", title: "Batterie pour solaire", cat: "energie" },
             { url: "https://www.facebook.com/reel/1518577302469118", title: "Batterie pour solaire", cat: "energie" },
             { url: "https://www.facebook.com/reel/1150486456409445", title: "Batterie pour solaire", cat: "energie" },
-
             //robot maison
             { url: "https://www.facebook.com/reel/847843824281203", title: "robot maison ", cat: "robot" },
             { url: "https://www.facebook.com/reel/2533808383654031", title: "robot maison ", cat: "robot" },
@@ -492,8 +558,6 @@
             { url: "https://www.facebook.com/reel/1330273488628691", title: "robot maison  fermer les verre", cat: "robot" },
             { url: "https://www.facebook.com/reel/1163015032347616", title: "robot maison  fermer les verre", cat: "robot" },
             { url: "https://www.facebook.com/reel/1852294179012121", title: "robot maison  fermer les verre", cat: "robot" },
-
-
             //machine
             { url: "https://www.facebook.com/reel/1308436620958067", title: "Machine CNC professionnelle", cat: "machine" },
             { url: "https://www.facebook.com/reel/25049676871369951", title: "Machine CNC professionnelle", cat: "machine" },
@@ -509,7 +573,6 @@
             { url: "https://www.facebook.com/reel/1623968908980795", title: "Machine CNC professionnelle", cat: "machine" },
             { url: "https://www.facebook.com/reel/1172603888344860", title: "Machine CNC professionnelle", cat: "machine" },
             { url: "https://www.facebook.com/reel/1151573510523905", title: "Machine CNC professionnelle", cat: "machine" },
-
             // Engins TP
             { url: " https://www.facebook.com/reel/715708698215329", title: "Machine CNC professionnelle", cat: "grosmachine" },
             { url: " https://www.facebook.com/reel/2099500824120327", title: "Machine CNC professionnelle", cat: "grosmachine" },
@@ -533,9 +596,6 @@
             { url: "https://www.facebook.com/reel/789736800572570", title: "Machine CNC professionnelle", cat: "machine" },
             { url: "https://www.facebook.com/reel/3617164245085355", title: "Machine CNC professionnelle", cat: "grosmachine" },
             { url: "https://www.facebook.com/reel/1403840404590440", title: "Machine CNC professionnelle", cat: "grosmachine" },
-
-
-
             //auto
             { url: "https://www.facebook.com/reel/1355600446166302", title: "Camion", cat: "auto" },
             { url: "https://www.facebook.com/reel/4159221697678409", title: "Camion", cat: "auto" },
@@ -547,9 +607,6 @@
             { url: "https://www.facebook.com/reel/765692979824114", title: "Lavage auto", cat: "autolavage" },
             { url: "https://www.facebook.com/reel/1457913765287584", title: "Parking auto", cat: "autolavage" },
             { url: "https://www.facebook.com/reel/1601493617673723", title: "Lavage auto", cat: "autolavage" },
-
-
-
             //moto
             { url: "https://www.facebook.com/reel/1851460815468095", title: "moto ", cat: "moto" },
             //ordinateur 
@@ -568,8 +625,6 @@
             // tuto construction 
             { url: "https://www.facebook.com/reel/430214556511249", title: "tuto construction", cat: "construction" },
             { url: "https://www.facebook.com/reel/1409567529625479", title: "tuto construction", cat: "construction" },
-
-
             //india construction
             { url: "https://www.facebook.com/reel/4125791447750452", title: "India construction", cat: "india" },
             { url: "https://www.facebook.com/reel/2238597769916146", title: "India construction", cat: "india" },
@@ -606,17 +661,13 @@
             { url: "https://www.facebook.com/reel/3898382900460925", title: "India 2 construction", cat: "india" },
             { url: "https://www.facebook.com/reel/821174970295213", title: "India 2 construction", cat: "india" },
             { url: "https://www.facebook.com/reel/24994275600237950", title: "India 2 construction", cat: "india" },
-
-
-
             //apprendre l arabe
             { url: "https://www.facebook.com/reel/1126742292650054", title: "Apprendre l arabe", cat: "arabe" },
             //diagnostic immobilier 
             { url: "https://www.facebook.com/reel/472036868543494", title: "Diagnostic immobiler dpe", cat: "immobilier" },
-
         ];
 
-        // Même système de filtrage + pagination que précédemment
+        // LOGIQUE DE FILTRAGE
         const itemsPerPage = 20;
         let currentCat = 'all', currentPage = 1;
         const grid = document.getElementById('grid');
@@ -663,37 +714,33 @@
             }
         }
 
+        // Ecouteur sur TOUS les boutons (PC et Mobile)
+        // On utilise 'document.querySelectorAll' après avoir cloné le menu pour être sûr de tout attraper
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.onclick = () => {
+                // Gestion visuelle active
                 document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentCat = btn.dataset.cat;
+
+                // Active le bouton cliqué ET ses "jumeaux" (ex: active le bouton 'Sourcing' PC et Mobile en même temps)
+                const category = btn.dataset.cat;
+                document.querySelectorAll(`.nav-btn[data-cat="${category}"]`).forEach(b => b.classList.add('active'));
+
+                currentCat = category;
                 currentPage = 1;
                 displayPage(1);
+
+                // Si on est sur mobile, on ferme le menu après le clic
+                if (window.innerWidth <= 768) {
+                    mobileMenu.classList.remove('active');
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
             };
         });
 
         displayPage(1);
     </script>
-    <script>
-        const toggle = document.getElementById('menuToggle');
-        const mobileMenu = document.getElementById('mobileMenu');
 
-        toggle.onclick = () => mobileMenu.classList.toggle('active');
-        mobileMenu.onclick = (e) => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); };
-
-        // Synchronise les deux menus
-        document.querySelectorAll('.nav-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll(`.nav-btn[data-cat="${this.dataset.cat}"]`).forEach(b => b.classList.add('active'));
-                currentCat = this.dataset.cat;
-                currentPage = 1;
-                displayPage(1);
-                mobileMenu.classList.remove('active'); // ferme le menu mobile
-            });
-        });
-    </script>
 </body>
 
 </html>
