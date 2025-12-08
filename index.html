@@ -675,6 +675,25 @@
 
         displayPage(1);
     </script>
+    <script>
+        const toggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        toggle.onclick = () => mobileMenu.classList.toggle('active');
+        mobileMenu.onclick = (e) => { if (e.target === mobileMenu) mobileMenu.classList.remove('active'); };
+
+        // Synchronise les deux menus
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll(`.nav-btn[data-cat="${this.dataset.cat}"]`).forEach(b => b.classList.add('active'));
+                currentCat = this.dataset.cat;
+                currentPage = 1;
+                displayPage(1);
+                mobileMenu.classList.remove('active'); // ferme le menu mobile
+            });
+        });
+    </script>
 </body>
 
 </html>
